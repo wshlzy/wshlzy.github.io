@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Menu with Frames</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background: url('../static/pictures/background.jpg') no-repeat center center fixed;
+            font-family: 'Roboto', sans-serif;
+            background: #f0f4f8;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .sidebarB {
+            width: 200px;
+            background: linear-gradient(135deg, #5a9bf6, #7ec8ff);
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 1em;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .sidebarB h2 {
+            font-size: 1.8em;
+            text-align: center;
+            margin-bottom: 1em;
+            border-bottom: 2px solid white;
+            padding-bottom: 0.5em;
+            font-weight: 700;
+        }
+        .sidebarB ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+        }
+        .sidebarB ul li {
+            padding: 0.8em 1.2em;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            border-radius: 5px;
+            margin: 0.3em 0;
+            display: flex;
+            align-items: center;
+            font-size: 1.1em;
+            font-weight: 700;
+        }
+        .sidebarB ul li:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+        .sidebarB ul li i {
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
+        .sidebarB .footer {
+            text-align: center;
+            padding: 1em 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 0.9em;
+        }
+        .catalogContent {
+            flex: 1;
+            padding: 2em;
+            overflow-y: auto;
+        }
+        .directory {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .directory > li {
+            border-radius: 6px;
+            padding: 10px;
+            font-size: 1.2em;
+            background-color: #97a0a6;
+            color: white;
+            border-bottom: 1px solid #ccc;
+            cursor: pointer;
+            margin-bottom: 5px;
+            transition: background 0.3s;
+        }
+        .directory > li:hover {
+            background-color: #7ec8ff;
+        }
+        .directory li.child {
+            background-color: white;
+            color: #333;
+            font-size: 1em;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            margin-left: 20px;
+        }
+        .directory li.child:hover {
+            background-color: #f0f0f0;
+        }
+        /*课程目录结束*/
+
+        .sidebar {
+            width: 200px;
+            background: linear-gradient(135deg, #1e90ff, #00bfff);
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 1em;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar h2 {
+            font-size: 1.8em;
+            text-align: center;
+            margin-bottom: 1em;
+            border-bottom: 2px solid white;
+            padding-bottom: 0.5em;
+            font-weight: 500;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+        }
+        .sidebar ul li {
+            padding: 0.8em 1.2em;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            border-radius: 5px;
+            margin: 0.3em 0;
+            display: flex;
+            align-items: center;
+            font-size: 1.1em;
+            font-weight: 400;
+        }
+        .sidebar ul li:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+        .sidebar ul li i {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        .sidebar .footer {
+            text-align: center;
+            padding: 1em 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 0.9em;
+        }
+
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 2em;
+            transition: transform 0.3s ease;
+            justify-content: center;
+            align-items: center;
+        }
+        .frame {
+            width: 90%;
+            height: 20%;
+            padding: 1em;
+            box-sizing: border-box;
+            transition: transform 0.3s ease;
+        }
+        .single-frame {
+            width: 90%;
+            height: 90%;
+            padding: 1em;
+            box-sizing: border-box;
+            transition: transform 0.3s ease;
+        }
+        .frame-content {
+            background: white;
+            height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1em;
+            box-sizing: border-box;
+            overflow: hidden;
+            position: relative;
+        }
+        .frame:hover {
+            transform: scale(1.05);
+            z-index: 1;
+        }
+        .fullscreen-iframe {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            z-index: 9999;
+            background: white;
+        }
+        .back-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #0f3f70;
+            color: white;
+            padding: 0.5em 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            z-index: 10000;
+        }
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 200px;
+            width: 200px;
+            background: rgba(30, 144, 255, 0.9);
+            color: white;
+            padding: 1em;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            transition: transform 0.3s ease;
+            border-radius: 0 10px 10px 0;
+        }
+        .submenu ul {
+            list-style: none;
+            padding: 0;
+        }
+        .submenu ul li {
+            padding: 0.5em 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+            border-radius: 5px;
+            margin: 0.5em 0;
+            font-size: 1em;
+            font-weight: 400;
+        }
+        .submenu ul li:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .submenu.active {
+            display: block;
+        }
+        .collapse-button {
+            padding: 0.5em;
+            background: transparent;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5em;
+            display: block;
+            text-align: center;
+            margin: 0.5em auto;
+        }
+        .container {
+            width: 80%;
+            max-width: 800px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 60px;
+            text-align: center;
+        }
+        .schedule-image {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        /*左侧边栏结束*/
+        .containerB {
+            width: 80%;
+            max-width: 800px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 60px;
+            text-align: center;
+        }
+        .schedule-image {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        /**/
+        .topbar {
+            width: 100%;
+            background: linear-gradient(135deg, #5a9bf6, #7ec8ff);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1em;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        .topbar button {
+            background: #f9f9f9;
+            color: rgb(4, 0, 0);
+            padding: 0.5em 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            margin-left: 1em;
+        }
+        .topbar button:hover {
+            background: #1d6ac0;
+        }
+        .topbar .profile {
+            display: flex;
+            align-items: center;
+        }
+        .topbar .profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            right:70px;
+            position:absolute;
+        }
+    </style>
+    <script>
+        function showFrames(frameId) {
+            var contentDivs = document.querySelectorAll('.catalogContent > div');
+            contentDivs.forEach(function(div) {
+                div.style.display = 'none';
+            });
+            document.getElementById(frameId).style.display = 'block';
+        }
+        function changeSemester() {
+            var semesterSelect = document.getElementById("semester-select");
+            var selectedSemester = semesterSelect.value;
+
+            var scheduleImage = document.querySelector('.schedule-image');
+            if(selectedSemester === '2023semester1') {
+                scheduleImage.src = '../../static/pictures/大一上.jpg'; // 修改为2023学年第一学期的课程表图片路径
+            } else if(selectedSemester === '2023semester2') {
+                scheduleImage.src = '../../static/pictures/大一下.jpg'; // 修改为2023学年第二学期的课程表图片路径
+            } else if(selectedSemester === '2024semester1') {
+                scheduleImage.src = '../../static/pictures/大二上.jpg'; // 修改为2024学年第一学期的课程表图片路径
+            } else if(selectedSemester === '2024semester2') {
+                scheduleImage.src = '../../static/pictures/大二下.jpg'; // 修改为2024学年第一学期的课程表图片路径
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="sidebarB">
+        <h2>目录</h2>
+        <button type="reset" onclick="javaScript:location.reload()" style="border-radius: 10px;background-color: #6ebad3;">主页面</button>
+        <button type="reset" style="border-radius: 10px;background-color: #6ebad3;"><a href="/teacher_login" style="color: black;">登出</a></button>
+        <ul>
+            <li onclick="showFrames('javaFrame')"><i class="fas fa-folder-open"></i>收取作业</li>
+            <li onclick="showFrames('statisticsFrame')"><i class="fas fa-folder-open"></i>发布作业</li>
+            <li onclick="showFrames('dataStructureFrame')"><i class="fas fa-folder-open"></i>课程表</li>
+            <li onclick="showFrames('graphFrame')"><i class="fas fa-folder-open"></i>统计图</li>
+            <li onclick="showFrames('databaseManagementFrame')"><i class="fas fa-folder-open"></i>管理学生信息</li>
+        </ul>
+        <div class="footer">
+            &copy; 2024 MenTorBrG
+        </div>
+    </div>
+    <!-- <div class="topbar">
+        <div>
+            <button onclick="location.reload();">Refresh</button>
+            <button onclick="window.location.href='/login'">Login</button>
+        </div>
+        <div class="profile">
+            <img src="Quiz2/Quiz/static/pictures/logo.jpg" alt="Profile Picture">
+        </div>
+    </div> -->
+    <div class="catalogContent" id="catalogContent">
+        
+        <div class="frame single-frame" id="single-frame">
+            <div class="containerB">
+                <h1>课程表</h1>
+                <select id="semester-select" onchange="changeSemester()">
+                    <option value="2023semester1">2023学年第一学期</option>
+                    <option value="2023semester2">2023学年第二学期</option>
+                    <option value="2024semester1">2024学年第一学期</option>
+                    <option value="2024semester2">2024学年第二学期</option>
+                </select>
+                <img src="../../static/pictures/大二下.jpg" alt="Schedule" class="schedule-image">
+            </div>
+        </div>
+        <div id="javaFrame" style="display: none;">
+            <ul class="directory">
+                <a href="/receive_homework"><li>收取作业</li></a>
+            </ul>
+        </div>
+        <div id="statisticsFrame" style="display: none;">
+            <ul class="directory">
+                <a href="/chuti"><li>出作业</li></a>
+            </ul>
+        </div>
+        <div id="dataStructureFrame" style="display: none;">
+            <div class="container">
+                <h1>课程表</h1>
+                <img src="../../../static/pictures/kebiao.jpg" alt="Schedule" class="schedule-image">
+            </div>
+        </div>
+        <div id="graphFrame" style="display: none;">
+            <ul class="directory">
+                <li><a href="/statistic1">L1-Variables</a></li>
+                <li><a href="/statistic2">L2-Control Statements</a></li>
+                <li><a href="/statistic3">L3-Classes & Methods</a></li>
+                <li><a href="/statistic4">L4-Instance Methods</a></li>
+                <li><a href="/statistic5">L5-Classes</a></li>
+                <li><a href="/statistic6">L6-Arrays</a></li>
+            </ul>
+        </div>
+        <div id="databaseManagementFrame" style="display: none;">
+            <ul class="directory">
+                <li><a href="/manage">管理学生</a></li>
+            </ul>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

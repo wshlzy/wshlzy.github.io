@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../static/images/icons/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/util.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css">
+    <style>
+        body {
+            font-family: 'Comic Neue', cursive;
+            background: url('../static/pictures/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container-login100 {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 600px; /* 修改最大宽度 */
+            width: 100%;
+        }
+        .login100-pic img {
+            max-width: 300px; /* 修改图像的最大宽度 */
+            border-radius: 20px;
+            margin-left: 0%;
+        }
+        .login100-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 15px;
+        }
+        .login100-form-title {
+            font-size: 70px; /* 修改标题的字体大小 */
+            margin-bottom: 150px;
+            margin-left:-40%;
+            color: #1e90ff; /* Dodger Blue */
+        }
+        .login100-form button {
+            background: #bec0c1; /* Light Sky Blue */
+            color: #1e90ff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 3em;
+            border-radius: 10px;
+            transition: background 0.3s, transform 0.3s;
+            margin: 5px 0;
+            width: 100%;
+            max-width: 300px; /* 修改按钮的最大宽度 */
+        }
+        .login100-form button:hover {
+            background: #6e7275; /* Dodger Blue */
+            transform: scale(1.05);
+        }
+        button{
+            position: relative;
+            top: -100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-login100">
+        <div class="login100-pic js-tilt" data-tilt>
+            <img src="../static/pictures/logo.jpg" alt="IMG">
+        </div>
+        <form class="login100-form validate-form">
+            <span class="login100-form-title animated jello">
+                MentorBrG
+            </span>
+            <a href="/stud_login">
+                <button type="button">学生端</button>
+            </a>
+            <a href="/teacher_login">
+                <button type="button">教师端</button>
+            </a>
+        </form>
+    </div>
+    <script src="../static/css/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="../static/css/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../static/css/vendor/select2/select2.min.js"></script>
+    <script src="../static/css/vendor/tilt/tilt.jquery.min.js"></script>
+    <script>
+        $('.js-tilt').tilt({
+            scale: 1.1
+        })
+    </script>
+</body>
+</html>

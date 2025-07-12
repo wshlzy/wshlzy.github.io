@@ -1,0 +1,278 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<html>
+	<head>
+		<title>课程页面</title>
+		<script type="text/JavaScript" src="../../../static/js/quizMethod.js"></script>
+		<script type="text/JavaScript" src="../../../static/js/Cookie.js"></script>
+		<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+		<link type="text/css" href="../../../static/css/question.css" rel="stylesheet">
+	</head>
+
+	<body onload="checkCookie('username')">
+		<div class="container">
+		<form method="post" action="/submit_Question" onsubmit="return submitForm()" name="form" id="questionForm">
+			<input type="hidden" value="" name="username" id="cookie">
+			<input type="hidden" value="choiceqe" name="database">
+			<div class="question">
+				<p>1. (单选题, 4.0 分) Choose the following codes' output:</p>
+				<div>
+					<pre>
+						<code>
+						<h1>
+int[] nums = {-1, 0, 1, 2, -1, -4};
+List<List<Integer>> result = new ArrayList<>();
+for (int i = 0; i < nums.length; i++) {
+	for (int j = i + 1; j < nums.length; j++) {
+		for (int k = j + 1; k < nums.length; k++) {
+			if (nums[i] + nums[j] + nums[k] == 0) {
+				List<Integer> triplet = new ArrayList<>();
+				triplet.add(nums[i]);
+				triplet.add(nums[j]);
+				triplet.add(nums[k]);
+				result.add(triplet);
+			}
+		}
+	}
+}
+System.out.println(result.size());
+						</h1>
+						</code>
+					</pre>
+				</div>
+			</div>
+	
+		<!-- Record the type/label of this question -->
+			<input type="hidden" value="1" name="sequence1" />
+			<input type="hidden" value="type1" name="Qtype1"/>
+			<input type="hidden" value="A" name="answer1" />
+			<input type="radio" id="optionA" name="cQ0" value="A">
+			<label for="optionA">A.
+				<pre><h2 style="font-size:20px">
+	2
+				</h2></pre>
+			</label>
+			
+			<input type="radio" id="optionB" name="cQ0" value="B">
+			<label for="optionB">B.
+				<pre><h2 style="font-size:20px">
+	3
+				</h2></pre>
+			</label>
+			
+			<input type="radio" id="optionC" name="cQ0" value="C">
+			<label for="optionC">C.
+				<pre><h2 style="font-size:20px">
+	4
+				</h2></pre>
+			</label>
+			
+			<input type="radio" id="optionD" name="cQ0" value="D">
+			<label for="optionD">D.
+				<pre><h2 style="font-size:20px">
+	5
+				</h2></pre>
+			</label>
+			<div id="result1"></div>
+			
+			<div class="question">
+				<p>2. (单选题, 4.0 分) Choose the following codes' output:</p>
+				<div>
+					<pre>
+						<code>
+						<h1>
+int[] nums = {1, 2, 3, 4, 5};
+for (int i = 0; i <= nums.length; i++) {
+	System.out.print(nums[i] + " ");
+}
+						</h1>
+						</code>
+					</pre>
+				</div>
+			</div>
+			
+			<input type="hidden" value="2" name="sequence2" />
+			<input type="hidden" value="C" name="answer2" />
+			<input type="hidden" value="type2" name="Qtype2"/>
+			<input type="radio" id="option2A" name="cQ1" value="A" />
+			<label for="option2A">A.
+				<pre><h2 style="font-size:20px">
+	1 2 3 4 5
+				</h2></pre>
+			</label>
+			
+			<input type="radio" id="option2B" name="cQ1" value="B" />
+			<label for="option2B">B.
+				<pre><h2 style="font-size:20px">
+	1 2 3 4 5 0
+				</h2></pre>
+			</label>
+			
+			<input type="radio" id="option2C" name="cQ1" value="C" />
+			<label for="option2C">C.
+				<pre><h2 style="font-size:20px">
+	ArrayIndexOutOfBoundsException
+				</h2></pre>
+			</label>
+			
+			<input type="radio" id="option2D" name="cQ1" value="D" />
+			<label for="option2D">D.
+				<pre><h2 style="font-size:20px">
+	以上都不正确
+				</h2></pre>
+			</label>
+			<div id="result2"></div>
+
+			
+			
+		<div class="question">
+			<p>3. (单选题, 4.0 分) Choose the following codes' output:</p>
+			<div>
+				<pre>
+					<code>
+					<h1>
+int[] arr1 = {1, 2, 3};
+int[] arr2 = {1, 2, 3};
+System.out.println(arr1 == arr2);
+					</h1>
+					</code>
+				</pre>
+			</div>
+		</div>
+			<input type="hidden" value="3" name="sequence3" />
+			<input type="hidden" value="A" name="answer3" />
+			<input type="hidden" value="type3" name="Qtype3"/>
+			<input type="radio" id="option3A" name="cQ2" value="A" />
+			<label for="option3A">A.
+				<pre><h2 style="font-size:20px">
+	true
+				</h2></pre>
+			</label>
+			
+			<input type="radio" id="option3B" name="cQ2" value="B" />
+			<label for="option3B">B.
+				<pre><h2 style="font-size:20px">
+	false
+				</h2></pre>
+			</label>
+			
+			<input type="radio" id="option3C" name="cQ2" value="C" />
+			<label for="option3C">C.
+				<pre><h2 style="font-size:20px">
+	编译报错
+				</h2></pre>
+			</label>
+			
+			<input type="radio" id="option3D" name="cQ2" value="D" />
+			<label for="option3D">D.
+				<pre><h2 style="font-size:20px">
+	运行时异常
+				</h2></pre>
+			</label>
+			<div id="result3"></div>
+
+		
+		
+		<div class="question">
+			<p>4. (单选题, 4.0 分) Choose the following codes' output:</p>
+			<div>
+				<pre>
+					<code>
+					<h1>
+	int[] nums = {3, 1, 4, 1, 5, 9, 2, 6, 5};
+Arrays.sort(nums);
+int index = Arrays.binarySearch(nums, 5);
+					</h1>
+					</code>
+				</pre>
+			</div>
+		</div>
+			<input type="hidden" value="4" name="sequence4" />
+			<input type="hidden" value="A" name="answer4" />
+			<input type="hidden" value="type4" name="Qtype4"/>
+			<input type="radio" id="option4A" name="cQ3" value="A" />
+			<label for="option4A">A.
+				<pre><h2 style="font-size:20px">
+	4
+				</h2></pre>
+			</label>
+			
+			<input type="radio" id="option4B" name="cQ3" value="B" />
+			<label for="option4B">B.
+				<pre><h2 style="font-size:20px">
+	7
+				</h2></pre>
+			</label>
+			
+			<input type="radio" id="option4C" name="cQ3" value="C" />
+			<label for="option4C">C.
+				<pre><h2 style="font-size:20px">
+	-6
+				</h2></pre>
+			</label>
+			
+			<input type="radio" id="option4D" name="cQ3" value="D" />
+			<label for="option4D">D.
+				<pre><h2 style="font-size:20px">
+	以上都不正确
+				</h2></pre>
+			</label>
+			<div id="result4"></div>
+
+			
+			
+		<div class="question">
+			<p>5. (单选题, 4.0 分) Choose the following codes' output:</p>
+			<div>
+				<pre>
+					<code>
+					<h1>
+int[] nums = new int[3];
+nums[0] = 1;
+nums[1] = 2;
+nums[2] = 3;
+nums = Arrays.copyOf(nums, 5);
+					</h1>
+					</code>
+				</pre>
+			</div>
+		</div>
+			<input type="hidden" value="5" name="sequence5" />
+			<input type="hidden" value="A" name="answer5" />
+			<input type="hidden" value="type5" name="Qtype5"/>
+			<input type="radio" id="option5A" name="cQ4" value="A" />
+			<label for="option5A">A.
+				<pre><h2 style="font-size:20px">
+	3
+				</h2></pre>
+			</label>
+			
+			<input type="radio" id="option5B" name="cQ4" value="B" />
+			<label for="option5B">B.
+				<pre><h2 style="font-size:20px">
+	5
+				</h2></pre>
+			</label>
+			
+			<input type="radio" id="option5C" name="cQ4" value="C" />
+			<label for="option5C">C.
+				<pre><h2 style="font-size:20px">
+	[1, 2, 3, 0, 0]
+				</h2></pre>
+			</label>
+			
+			<input type="radio" id="option5D" name="cQ4" value="D" />
+			<label for="option5D">D.
+				<pre><h2 style="font-size:20px">
+	[1, 2, 3]
+				</h2></pre>
+			</label>
+			<div id="result5"></div>
+			<br>
+			
+			<div id="submitButton">
+				<button type="submit" id="submitButton" onclick="checkSelect()"><h1>Submit</h1></button>
+			</div>
+		</form>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Comic Neue', cursive;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5em;
+            color: #5a9bf6;
+        }
+        .container {
+            width: 80%;
+            max-width: 800px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 60px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background: hsl(201, 71%, 78%);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        li span {
+            font-size: 1.2em;
+        }
+        li button {
+            background: #d34b19;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        li button:hover {
+            background: #e55347;
+        }
+    </style>
+</head>
+<body>
+    <a href="/stud_homepage"><button class="back-button" onclick="goBack()"><img src="../../../static/pictures/back.png" width="20%" height="20%"></button></a>
+    <h1>未完成的测验列表</h1>
+    <div class="container">
+        <ul id="homework-list">
+            <!-- 作业项将通过JavaScript动态插入 -->
+        </ul>
+    </div>
+
+    <script>
+        const homeworks = [
+            { title: "Math Homework", dueDate: "2024-07-20" },
+            { title: "Science Project", dueDate: "2024-07-22" },
+            { title: "History Essay", dueDate: "2024-07-25" },
+            { title: "Art Assignment", dueDate: "2024-07-28" }
+        ];
+
+        const homeworkList = document.getElementById('homework-list');
+
+        homeworks.forEach(homework => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <span>${homework.title} - Due: ${homework.dueDate}</span>
+                <button onclick="markAsDone('${homework.title}')">Do it!</button>
+            `;
+            homeworkList.appendChild(li);
+        });
+
+        function markAsDone(title) {
+            const homeworkItems = document.querySelectorAll('#homework-list li');
+            homeworkItems.forEach(item => {
+                if (item.innerText.includes(title)) {
+                    item.style.textDecoration = "line-through";
+                    item.querySelector('button').disabled = true;
+                    item.querySelector('button').innerText = "Completed";
+                }
+            });
+        }
+
+        function goBack() {
+            window.location.href = '/stud_homepage'; // 将 'index.html' 替换为你的主页面路径
+        }
+    </script>
+</body>
+</html>

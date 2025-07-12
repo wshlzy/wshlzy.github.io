@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expandable Draggable Iframe Box</title>
+<style>
+  body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e0e0e0;
+  }
+
+  .draggable {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    cursor: move;
+    transition: width 0.5s, height 0.5s;
+  }
+
+  .circle {
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+  }
+
+  .iframe-box {
+    width: 0;
+    height: 0;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    transition: width 0.5s, height 0.5s;
+    position: absolute;
+    top: -310px; /* Position iframe box above the circle */
+    left: -225px; /* Center iframe box relative to circle */
+  }
+
+  .iframe-box.active {
+    width: 500px;
+    height: 300px;
+  }
+
+  .iframe-content {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="draggable" id="draggable">
+  <div class="circle" id="circle"></div>
+  <div class="iframe-box" id="iframeBox">
+    <iframe class="iframe-content" id="iframeContent" src="about:blank"></iframe>
+  </div>
+</div>
+
+<script>
+  var isDragging = false;
+
+  document.getElementById("circle").onclick = function() {
+    if (!isDragging) {
+      var iframeBox = document.getElementById("iframeBox");
+      iframeBox.classList.toggle("active");
+    }
+  }
+
+  function setIframeSrc(url) {
+    var iframeContent = document.getElementById("iframeContent");
+    iframeContent.src = url;
+  }
+
+  dragElement(document.getElementById("draggable"));
+
+  function dragElement(elmnt) {
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+    elmnt.onmousedown = dragMouseDown;
+
+    function dragMouseDown(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = closeDragElement;
+      document.onmousemove = elementDrag;
+      isDragging = false;
+    }
+
+    function elementDrag(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+      elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      isDragging = true;
+    }
+
+    function closeDragElement() {
+      document.onmouseup = null;
+      document.onmousemove = null;
+      setTimeout(() => {
+        isDragging = false;
+      }, 100); // Adding a small delay to ensure click event isn't fired immediately after drag
+    }
+  }
+
+  // Example usage: Change the iframe source URL
+  setIframeSrc('https://www.example.com');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>未交作业学生名单</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background-color: #f0f8ff; /* Alice Blue */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: #1e90ff; /* Dodger Blue */
+            margin-bottom: 20px;
+        }
+        .table-responsive {
+            margin-top: 20px;
+            width: 100%;
+            overflow-x: auto;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 20px;
+            text-align: left;
+        }
+        .table thead tr {
+            background-color: #1e90ff; /* Dodger Blue */
+            color: white;
+        }
+        .table th, .table td {
+            padding: 16px 20px;
+            border: 1px solid #ddd;
+        }
+        .table tbody tr:nth-child(odd) {
+            background-color: white;
+        }
+        .table tbody tr:nth-child(even) {
+            background-color: #f0f8ff; /* Alice Blue */
+        }
+        .table tr:hover {
+            background-color: #ddd; /* Darker Gray */
+        }
+        .table th {
+            background-color: #1e90ff; /* Dodger Blue */
+            color: white;
+        }
+        .table td {
+            color: black; /* Black font for table content */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>未交作业学生名单</h1>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2023001</td>
+                        <td>John Doe</td>
+                    </tr>
+                    <tr>
+                        <td>2023002</td>
+                        <td>Jane Smith</td>
+                    </tr>
+                    <tr>
+                        <td>2023003</td>
+                        <td>Emily Johnson</td>
+                    </tr>
+                    <tr>
+                        <td>2023004</td>
+                        <td>Michael Brown</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

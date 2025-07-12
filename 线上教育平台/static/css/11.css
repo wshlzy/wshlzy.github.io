@@ -1,0 +1,64 @@
+
+body {
+  color:#000000;
+  
+  background-image: url("图片/背景.jpg"); 
+  background-attachment: fixed;
+  font-family:arial, verdana, sans-serif; 
+  font-size:18px;
+  }
+
+nav {
+  display: flex;
+  justify-content: center;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+nav ul li {
+  float: left;
+  position: relative;
+}
+
+nav ul li a {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #000;
+}
+
+nav ul li a:hover {
+  background-color: #555;
+  color: #fff;
+}
+
+nav ul li ul li {
+  float: none;
+}
+
+nav ul li ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  padding: 15px 0;
+  border: 1px solid #ccc;
+  width: 20000px;
+  white-space: nowrap; /* Prevent text from wrapping */
+
+}
+
+nav ul li:hover ul {
+  display: block;
+}
+
+a {
+  text-decoration: none;
+}
+

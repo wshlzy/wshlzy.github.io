@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <script tpe="text/JavaScript" src="../static/js/Cookie.js"></script>
+    </head>
+
+    <body onload="checkCookie('username')">
+        <div>
+            <form method="post" action="/manage_student">
+                <label for="stud_ID">学生ID: </label>
+                    <input type="text" name="studentID" id="stud_ID"placeholder="请输入学生ID">
+                <label for="course_Name">添加到的课程：</label>
+                <select name="course" id="course_Name">
+                    <option value="">--请选择要将学生添加到的课程--</option>
+                    <option value="java programming">Java Programming</option>
+                    <option value="statistic">Statistic</option>
+                    <option value="data structure">Data Structure</option>
+                    <option value="web design">Web Design & Programming</option>
+                    <option value="database management">Database Management</option>
+                </select>
+                <input type="hidden" name="teacherID" name="username" id="cookie">
+                <button type="submit">提交</button>
+            </form>
+        </div>
+    </body>
+</html>

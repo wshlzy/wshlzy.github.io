@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册页面</title>
+    <script>
+        // 解决校验基础格式的问题
+        function validate(form) {
+            var username = form.username.value;
+            var password = form.password.value;
+            var confirm = form.confirm_password.value;
+            var hasUpperCase = (password) => /[A-Z]/.test(password);
+            var hasLowerCase = (password) => /[a-z]/.test(password);
+            var hasSpecialChar = (password) => /[^A-Za-z0-9]/.test(password);
+
+            if (!username || !password || !confirm) {
+                alert("请填写所有字段");
+                return false;
+            }
+
+            if (username.length < 6){
+                alert("用户名需不少于6位数");
+                return false;
+            }
+
+            if (!hasUpperCase || !hasLowerCase || !hasSpecialChar){
+                alert("密码需包含大写、小写字母和特殊字符");
+                return false;
+            }
+
+            if (password.length < 6){
+                alert("密码需不少于6位数");
+                return false;
+            }
+
+            if (password != confirm){
+                alert("两次输入的密码不同，请重试");
+                return false;
+            }
+        }
+    </script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('../static/pictures/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .register-container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+        .register-container h2 {
+            margin-bottom: 1em;
+        }
+        .register-container label {
+            display: block;
+            margin: 0.5em 0;
+            text-align: left;
+        }
+        .register-container input {
+            width: 100%;
+            padding: 0.5em;
+            margin: 0.5em 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .register-container button {
+            width: 100%;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #1e90ff;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .register-container button:hover {
+            background: #1c86ee;
+        }
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding: 20px 5px;
+            gap:5px;
+        }
+        .button-group > *{
+            flex: auto;
+            width: 100%; 
+        } 
+        a.button-link{
+            line-height: 40px;
+            padding: 1px 10px;
+            background: #1e90ff;
+            border: 1px solid #ccc;
+            text-decoration: none;
+            color: white;
+            border-radius: 4px;
+        }
+        .button-link:hover{
+            background: #1c86ee;
+        }    
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h2>学生端注册</h2>
+        <form method="post" action="/regist_over" onsubmit="return validate(this)">
+            <label>用户名:
+                <input type="text" name="username" placeholder="Username...">
+            </label>
+            <label>密码:
+                <input type="password" name="password" placeholder="Password...">
+            </label>
+            <label>确认密码:
+                <input type="password" name="confirm_password" placeholder="Confirm Password...">
+            </label>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                <div class="error-messages">
+                    {% for category, message in messages %}
+                    <div class="error" style="color:red"> {{ message }}</div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            {% endwith %}
+            <div class="button-group">
+                <a href="/stud_login" class="button-link">返回登陆</a>
+                <button type="reset">清空</button>
+                <button type="submit">注册</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

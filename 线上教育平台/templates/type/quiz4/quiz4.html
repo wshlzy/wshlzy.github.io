@@ -1,0 +1,87 @@
+<html>
+	<head>
+		<script>
+			function displayDiv(type) {
+				document.querySelector('#str').setAttribute('style','display','inline');
+				var name = '#'+type;
+				var div = document.querySelector(name);
+				div.setAttribute('style','display','inline');
+			}
+			
+			window.addEventListener('message', function(event){
+				if(event.data.type1 === 'Y'){
+					displayDiv("type1");
+				}
+				if(event.data.type2 === 'Y'){
+					displayDiv("type2");
+				}
+				if(event.data.type3 === 'Y'){
+					displayDiv("type3");
+				}
+				if(event.data.type4 === 'Y'){
+					displayDiv("type4");
+				}
+				if(event.data.type5 === 'Y'){
+					displayDiv("type5");
+				}
+			});
+		</script>
+		<link type="text/css" href="../../../static/css/quiz.css" rel="stylesheet">
+        <script type="text/Javascript" src="../../../static/js/content.js"></script>
+        <link type="text/css" href="../../../static/css/content.css" rel="stylesheet">
+	</head>
+	
+	<body>
+		<div class="container">
+		<div class="links">
+		<h3 style="display: inline;"><a href="/quiz3_video">视频课</a></h3>
+		<h3 style="display: inline;"><a href="/quiz3_ppt">PPT</a></h3>
+		<h3 style="display: inline;"><a href="/quiz3_textbook">教科书</a></h3>
+		<h3 style="display: inline;"><a href="/quiz3">测试题</a></h3>
+		<a href="/stud_homepage"><button class="openbtn">返回</button></a><br>
+        <button class="openbtn right" id="toggleRightBtn" onclick="toggleNav('right')">收起章节目录</button>
+		<div style="text-align: center;">
+        <div id="rightSidebar" class="sidebarA rightA">
+                <div class="sidebar-titleA">
+                    章节目录
+                    <hr>
+                </div>
+                    <a href="/quiz1_video">L1-Variables</a>
+                    <a href="/quiz2_video">L2-Control Statements</a>
+                    <a href="/quiz3_video">L3-Classes & Methods</a>
+                    <a href="/quiz4_video">L4-Instance Methods</a>
+                    <a href="/quiz5_video">L5-Classes</a>
+                    <a href="/quiz6_video">L6-Arrays</a>
+            </div>
+			<iframe name="NewQ" id="NewQ" height="100%" width="100%" src="/quiz1_Question" frameborder="0">This is the php file</iframe>
+			<br /><br />
+			<h1 style="display:none;" id="str">Additional Questions Placeholder</h1>
+			
+			<div style="display:none;" id="type1">
+				<h2>Choice Question: Type1  i++</h2>
+				<iframe height="100%" width="100%" src="/quiz1_type1"  frameborder="0"></iframe>
+			</div>
+			
+			<div style="display:none;" id="type2">
+				<h2>Choice Question: Type2</h2>
+				<iframe height="100%" width="100%" src="/quiz1_type2"  frameborder="0"></iframe>
+			</div>
+			
+			<div style="display:none;" id="type3">
+				<h2>Choice Question: Type3</h2>
+				<iframe height="100%" width="100%" src="/quiz1_type3" frameborder="0"></iframe>
+			</div>
+			
+			<div style="display:none;" id="type4">
+				<h2>Choice Question: Type4</h2>
+				<iframe height="100%" width="100%" src="/quiz1_type4" frameborder="0"></iframe>
+			</div>
+			
+			<div style="display:none;" id="type5">
+				<h2>Choice Question: Type5</h2>
+				<iframe height="100%" width="100%" src="/quiz1_type5" frameborder="0"></iframe>
+			</div>
+		</div>
+		</div>
+	</body>
+</html>

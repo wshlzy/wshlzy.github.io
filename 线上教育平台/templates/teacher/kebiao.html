@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Comic Neue', cursive;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5em;
+            color: #5a9bf6;
+        }
+        .containerB {
+            width: 80%;
+            max-width: 800px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 60px;
+            text-align: center;
+        }
+        .schedule-image {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <button class="back-button" onclick="goBack()">
+        <img src="../../../static/pictures/back.png" alt="Back" style="width: 15%; height: 15%;">
+    </button>
+    <div class="containerB">
+        <h1>课程表</h1>
+        <select id="semester-select" onchange="changeSemester()">
+            <option value="2023semester1">2023学年第一学期</option>
+            <option value="2023semester2">2023学年第二学期</option>
+            <option value="2024semester1">2024学年第一学期</option>
+            <option value="2024semester2">2024学年第二学期</option>
+        </select>
+        <img src="../../static/pictures/大二下.jpg" alt="Schedule" class="schedule-image">
+    </div>
+
+    <script>
+        function goBack() {
+            window.location.href = 'index.html'; // 将 'index.html' 替换为你的主页面路径
+        }
+
+        function changeSemester() {
+            var semesterSelect = document.getElementById("semester-select");
+            var selectedSemester = semesterSelect.value;
+
+            var scheduleImage = document.querySelector('.schedule-image');
+            if(selectedSemester === '2023semester1') {
+                scheduleImage.src = '../../static/pictures/大一上.jpg'; // 修改为2023学年第一学期的课程表图片路径
+            } else if(selectedSemester === '2023semester2') {
+                scheduleImage.src = '../../static/pictures/大一下.jpg'; // 修改为2023学年第二学期的课程表图片路径
+            } else if(selectedSemester === '2024semester1') {
+                scheduleImage.src = '../../static/pictures/大二上.jpg'; // 修改为2024学年第一学期的课程表图片路径
+            } else if(selectedSemester === '2024semester2') {
+                scheduleImage.src = '../../static/pictures/大二下.jpg'; // 修改为2024学年第一学期的课程表图片路径
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Menu with Frames</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /*左侧边栏开始*/
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: #f0f4f8;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .sidebar {
+            width: 200px;
+            background: linear-gradient(135deg, #1e90ff, #00bfff);
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 1em;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar h2 {
+            font-size: 1.8em;
+            text-align: center;
+            margin-bottom: 1em;
+            border-bottom: 2px solid white;
+            padding-bottom: 0.5em;
+            font-weight: 500;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+        }
+        .sidebar ul li {
+            padding: 0.8em 1.2em;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            border-radius: 5px;
+            margin: 0.3em 0;
+            display: flex;
+            align-items: center;
+            font-size: 1.1em;
+            font-weight: 400;
+        }
+        .sidebar ul li:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+        .sidebar ul li i {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        .sidebar .footer {
+            text-align: center;
+            padding: 1em 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 0.9em;
+        }
+
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 2em;
+            transition: transform 0.3s ease;
+            justify-content: center;
+            align-items: center;
+        }
+        .frame {
+            width: 90%;
+            height: 20%;
+            padding: 1em;
+            box-sizing: border-box;
+            transition: transform 0.3s ease;
+        }
+        .single-frame {
+            width: 90%;
+            height: 90%;
+            padding: 1em;
+            box-sizing: border-box;
+            transition: transform 0.3s ease;
+        }
+        .frame-content {
+            background: white;
+            height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1em;
+            box-sizing: border-box;
+            overflow: hidden;
+            position: relative;
+        }
+        .frame:hover {
+            transform: scale(1.05);
+            z-index: 1;
+        }
+        .fullscreen-iframe {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            z-index: 9999;
+            background: white;
+        }
+        .back-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #0f3f70;
+            color: white;
+            padding: 0.5em 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            z-index: 10000;
+        }
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 200px;
+            width: 200px;
+            background: rgba(30, 144, 255, 0.9);
+            color: white;
+            padding: 1em;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            transition: transform 0.3s ease;
+            border-radius: 0 10px 10px 0;
+        }
+        .submenu ul {
+            list-style: none;
+            padding: 0;
+        }
+        .submenu ul li {
+            padding: 0.5em 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+            border-radius: 5px;
+            margin: 0.5em 0;
+            font-size: 1em;
+            font-weight: 400;
+        }
+        .submenu ul li:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .submenu.active {
+            display: block;
+        }
+        .collapse-button {
+            padding: 0.5em;
+            background: transparent;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5em;
+            display: block;
+            text-align: center;
+            margin: 0.5em auto;
+        }
+        /*左侧边栏结束*/
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>目录</h2>
+        <ul id="main-menu">
+            <li onclick="showSubmenu('submenu1')"><i class="fas fa-folder-open"></i>JAVA Programming</li>
+            <li onclick="showSubmenu('submenu2')"><i class="fas fa-folder-open"></i>Statistics</li>
+            <li onclick="showSubmenu('submenu3')"><i class="fas fa-folder-open"></i>Data Structure</li>
+            <li onclick="showSubmenu('submenu4')"><i class="fas fa-folder-open"></i>Web Design & Programming</li>
+            <li onclick="showSubmenu('submenu5')"><i class="fas fa-folder-open"></i>Database Management</li>
+        </ul>
+        <div class="footer">
+            &copy; 2024 My Website
+        </div>
+    </div>
+    <div class="submenu" id="submenu1">
+        <ul>
+            <li onclick="showFrames('submenu1-frame1')">L1-Variables</li>
+            <li onclick="showFrames('submenu1-frame2')">L2-Control Statements</li>
+            <li onclick="showFrames('submenu1-frame3')">L3-Classes & Methods</li>
+            <li onclick="showFrames('submenu1-frame4')">L4-Instance Methods</li>
+            <li onclick="showFrames('submenu1-frame5')">L5-Classes</li>
+            <li onclick="showFrames('submenu1-frame6')">L6-Arrays</li>
+        </ul>
+        <button class="collapse-button" onclick="collapseSubmenu()"><i class="fas fa-chevron-left"></i></button>
+    </div>
+    <div class="submenu" id="submenu2">
+        <ul>
+            <li onclick="showFrames('submenu2-frame1')">子目录 2-1</li>
+            <li onclick="showFrames('submenu2-frame2')">子目录 2-2</li>
+            <li onclick="showFrames('submenu2-frame3')">子目录 2-3</li>
+        </ul>
+        <button class="collapse-button" onclick="collapseSubmenu()"><i class="fas fa-chevron-left"></i></button>
+    </div>
+    <div class="submenu" id="submenu3">
+        <ul>
+            <li onclick="showFrames('submenu3-frame1')">子目录 3-1</li>
+            <li onclick="showFrames('submenu3-frame2')">子目录 3-2</li>
+            <li onclick="showFrames('submenu3-frame3')">子目录 3-3</li>
+        </ul>
+        <button class="collapse-button" onclick="collapseSubmenu()"><i class="fas fa-chevron-left"></i></button>
+    </div>
+    <div class="submenu" id="submenu4">
+        <ul>
+            <li onclick="showFrames('submenu4-frame1')">子目录 4-1</li>
+            <li onclick="showFrames('submenu4-frame2')">子目录 4-2</li>
+            <li onclick="showFrames('submenu4-frame3')">子目录 4-3</li>
+        </ul>
+        <button class="collapse-button" onclick="collapseSubmenu()"><i class="fas fa-chevron-left"></i></button>
+    </div>
+    <div class="submenu" id="submenu5">
+        <ul>
+            <li onclick="showFrames('submenu5-frame1')">子目录 5-1</li>
+            <li onclick="showFrames('submenu5-frame2')">子目录 5-2</li>
+            <li onclick="showFrames('submenu5-frame3')">子目录 5-3</li>
+        </ul>
+        <button class="collapse-button" onclick="collapseSubmenu()"><i class="fas fa-chevron-left"></i></button>
+    </div>
+    <div class="content" id="content">
+        <div class="frame single-frame" id="single-frame">
+            <div class="frame-content">
+                <h2>课程简介</h2>
+                <p>默认显示的单一框架内容。</p>
+            </div>
+        </div>
+    </div>
+    <div class="content" id="submenu1-frame1" style="display: none;">
+        <div class="frame" id="single-frame">
+            <div class="frame-content" id="catalog-content">
+                <a href="/quiz1_textbook"><h2>教材</h2></a>
+                <a href=""><h2>L1-Variables</h2></a>
+                <a href="/quiz1_video"><h2>1.1 Video</h2></a>
+                <a href="/quiz1_video"><h2>1.2 PowerPoint</h2></a>
+                <a href="/quiz1_video"><h2>1.3 Practice 1</h2></a>
+                <a href=""><h2>L2-Control Statements</h2></a>
+                <a href="/quiz1_video"><h2>2.1 Video</h2></a>
+                <a href="/quiz1_video"><h2>2.2 PowerPoint</h2></a>
+                <a href="/quiz1_video"><h2>2.3 Practice 2</h2></a>
+                <a href=""><h2>L3-Classes & Methods</h2></a>
+                <a href="/quiz1_video"><h2>3.1 Video</h2></a>
+                <a href="/quiz1_video"><h2>3.2 PowerPoint</h2></a>
+                <a href="/quiz1_video"><h2>3.3 Practice 3</h2></a>
+                <a href=""><h2>L4-Instance Methods</h2></a>
+                <a href="/quiz1_video"><h2>4.1 Video</h2></a>
+                <a href="/quiz1_video"><h2>4.2 PowerPoint</h2></a>
+                <a href="/quiz1_video"><h2>4.3 Practice 4</h2></a>
+                <a href=""><h2>L5-Classes</h2></a>
+                <a href="/quiz1_video"><h2>5.1 Video</h2></a>
+                <a href="/quiz1_video"><h2>5.2 PowerPoint</h2></a>
+                <a href="/quiz1_video"><h2>5.3 Practice 5</h2></a>
+                <a href=""><h2>L6-Arrays</h2></a>
+                <a href="/quiz1_video"><h2>6.1 Video</h2></a>
+                <a href="/quiz1_video"><h2>6.2 PowerPoint</h2></a>
+                <a href="/quiz1_video"><h2>6.3 Practice 6</h2></a>
+{#                <iframe src="/quiz1_video" onclick="openFullscreen(this)" style="width: 100%; height: 60%; border: none;"></iframe>#}
+            </div>
+        </div>
+    </div>
+    <div class="content" id="submenu1-frame1" style="display: none;">
+        <div class="frame">
+            <div class="frame-content">
+                <a href="/quiz1_video"><h2>Video</h2></a>
+                <iframe src="/quiz1_video" onclick="openFullscreen(this)" style="width: 100%; height: 60%; border: none;"></iframe>
+            </div>
+        </div>
+        <div class="frame">
+            <div class="frame-content">
+                <a href="/quiz1_ppt"><h2>PPT</h2></a>
+                <iframe src="/quiz1_ppt" onclick="openFullscreen(this)" style="width: 50%; height: 60%; border: none;"></iframe>
+            </div>
+        </div>
+        <div class="frame">
+            <div class="frame-content">
+                <a href="/quiz1_textbook"><h2>Textbook</h2></a>
+                <iframe src="/quiz1_textbook" onclick="openFullscreen(this)" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+        </div>
+        <div class="frame">
+            <div class="frame-content">
+                <a href="/quiz2"><h2>Practice</h2></a>
+                <iframe src="/quiz2" onclick="openFullscreen(this)" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="content" id="submenu1-frame3" style="display: none;">
+        <div class="frame">
+            <div class="frame-content">
+                <a href="/quiz1_video"><h2>Video</h2></a>
+                <iframe src="/quiz1_video" onclick="openFullscreen(this)" style="width: 100%; height: 60%; border: none;"></iframe>
+            </div>
+        </div>
+        <div class="frame">
+            <div class="frame-content">
+                <a href="/quiz1_ppt"><h2>PPT</h2></a>
+                <iframe src="/quiz1_ppt" onclick="openFullscreen(this)" style="width: 50%; height: 60%; border: none;"></iframe>
+            </div>
+        </div>
+        <div class="frame">
+            <div class="frame-content">
+                <a href="/quiz1_textbook"><h2>Textbook</h2></a>
+                <iframe src="/quiz1_textbook" onclick="openFullscreen(this)" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+        </div>
+        <div class="frame">
+            <div class="frame-content">
+                <a href="/quiz3"><h2>Practice</h2></a>
+                <iframe src="/quiz3" onclick="openFullscreen(this)" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="content" id="submenu1-frame4" style="display: none;">
+        <div class="frame">
+            <div class="frame-content">
+                <a href="/quiz1_video"><h2>Video</h2></a>
+                <iframe src="/quiz1_video" onclick="openFullscreen(this)" style="width: 100%; height: 60%; border: none;"></iframe>
+            </div>
+        </div>
+        <div class="frame">
+            <div class="frame-content">
+                <a href="/quiz1_ppt"><h2>PPT</h2></a>
+                <iframe src="/quiz1_ppt" onclick="openFullscreen(this)" style="width: 50%; height: 60%; border: none;"></iframe>
+            </div>
+        </div>
+        <div class="frame">
+            <div class="frame-content">
+                <a href="/quiz1_textbook"><h2>Textbook</h2></a>
+                <iframe src="/quiz1_textbook" onclick="openFullscreen(this)" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+        </div>
+        <div class="frame">
+            <div class="frame-content">
+                <a href="/quiz4"><h2>Practice</h2></a>
+                <iframe src="/quiz4" onclick="openFullscreen(this)" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="content" id="submenu1-frame5" style="display: none;">
+        <div class="frame">
+            <div class="frame-content">
+                <a href="/quiz1_video"><h2>Video</h2></a>
+                <iframe src="/quiz1_video" onclick="openFullscreen(this)" style="width: 100%; height: 60%; border: none;"></iframe>
+            </div>
+        </div>
+        <div class="frame">
+            <div class="frame-content">
+                <a href="/quiz1_ppt"><h2>PPT</h2></a>
+                <iframe src="/quiz1_ppt" onclick="openFullscreen(this)" style="width: 50%; height: 60%; border: none;"></iframe>
+            </div>
+        </div>
+        <div class="frame">
+            <div class="frame-content">
+                <a href="/quiz1_textbook"><h2>Textbook</h2></a>
+                <iframe src="/quiz1_textbook" onclick="openFullscreen(this)" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+        </div>
+        <div class="frame">
+            <div class="frame-content">
+                <a href="/quiz5"><h2>Practice</h2></a>
+                <iframe src="/quiz5" onclick="openFullscreen(this)" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="content" id="submenu1-frame6" style="display: none;">
+        <div class="frame">
+            <div class="frame-content">
+                <a href="/quiz6_video"><h2>Video</h2></a>
+                <iframe src="/quiz6_video" onclick="openFullscreen(this)" style="width: 100%; height: 60%; border: none;"></iframe>
+            </div>
+        </div>
+        <div class="frame">
+            <div class="frame-content">
+                <a href="/quiz1_ppt"><h2>PPT</h2></a>
+                <iframe src="/quiz1_ppt" onclick="openFullscreen(this)" style="width: 50%; height: 60%; border: none;"></iframe>
+            </div>
+        </div>
+        <div class="frame">
+            <div class="frame-content">
+                <a href="/quiz1_textbook"><h2>Textbook</h2></a>
+                <iframe src="/quiz1_textbook" onclick="openFullscreen(this)" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+        </div>
+        <div class="frame">
+            <div class="frame-content">
+                <a href="/quiz6"><h2>Practice</h2></a>
+                <iframe src="/quiz6" onclick="openFullscreen(this)" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="content" id="submenu2-frame1" style="display: none;">
+        <div class="frame">
+            <div class="frame-content">
+                <h2>Frame 2-1</h2>
+                <iframe src="/quiz2_video" onclick="openFullscreen(this)" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+        </div>
+        <div class="frame">
+            <div class="frame-content">
+                <h2>Frame 2-2</h2>
+                <iframe src="/quiz2_ppt" onclick="openFullscreen(this)" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+        </div>
+        <div class="frame">
+            <div class="frame-content">
+                <h2>Frame 2-3</h2>
+                <iframe src="/quiz2_textbook" onclick="openFullscreen(this)" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+        </div>
+        <div class="frame">
+            <div class="frame-content">
+                <h2>Frame 2-4</h2>
+                <a href="/quiz2"><h2>Practice</h2></a>
+                <iframe src="/quiz2" onclick="openFullscreen(this)" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+        </div>
+    </div>
+    <!-- Repeat similar blocks for other submenus and frames -->
+
+    <script>
+        function showCourseCatalog(catalogID){
+            document.getElementById('single-frame').style.display = 'none';
+
+            // Hide all content divs
+            var contentDivs = document.querySelectorAll('.content');
+            contentDivs.forEach(function(div) {
+                div.style.display = 'none';
+            });
+
+            // Show the selected content div
+            document.getElementById(frameId).style.display = 'flex';
+        }
+
+        function showSubmenu(id) {
+            // Hide all submenus
+            var submenus = document.querySelectorAll('.submenu');
+            submenus.forEach(function(submenu) {
+                submenu.classList.remove('active');
+            });
+
+            // Show the selected submenu
+            var submenu = document.getElementById(id);
+            submenu.classList.add('active');
+        }
+
+        function showFrames(frameId) {
+            // Hide the single frame
+            document.getElementById('single-frame').style.display = 'none';
+
+            // Hide all content divs
+            var contentDivs = document.querySelectorAll('.content');
+            contentDivs.forEach(function(div) {
+                div.style.display = 'none';
+            });
+
+            // Show the selected content div
+            document.getElementById(frameId).style.display = 'flex';
+        }
+
+        function collapseSubmenu() {
+            // Hide all submenus
+            var submenus = document.querySelectorAll('.submenu');
+            submenus.forEach(function(submenu) {
+                submenu.classList.remove('active');
+            });
+
+            // Show the single frame
+            document.getElementById('single-frame').style.display = 'block';
+        }
+
+        function openFullscreen(iframe) {
+            iframe.classList.add('fullscreen-iframe');
+            const closeButton = document.createElement('button');
+            closeButton.textContent = 'Close';
+            closeButton.classList.add('back-button');
+            closeButton.addEventListener('click', function () {
+                iframe.classList.remove('fullscreen-iframe');
+                closeButton.remove();
+            });
+            document.body.appendChild(closeButton);
+        }
+
+        mainMenuItem.addEventListener('mouseout', function(event) {
+        var target = event.relatedTarget;
+        var submenu = document.getElementById('submenu1');
+
+            if (!submenu.contains(target)) {
+                submenu.classList.remove('active');
+            }
+        });
+        document.addEventListener('click', function(event) {
+            var target = event.target;
+            var submenu = document.getElementById('submenu1');
+
+            if (target.matches('#main-menu li') || target.matches('#main-menu li *')) {
+                submenu.classList.add('active');
+            } else if (!submenu.contains(target)) {
+                submenu.classList.remove('active');
+            }
+        });
+    </script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

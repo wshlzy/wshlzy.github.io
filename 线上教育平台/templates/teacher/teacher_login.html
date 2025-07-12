@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录页面</title>
+    <script>
+        function validate(form) {
+            var username = form.username.value;
+            var password = form.password.value;
+
+            if (!username || !password) {
+                alert("请填写所有字段");
+                return false;
+            }
+
+            if (password.length < 6){
+                alert("密码不小于6位数");
+                return false;
+            }
+        }
+
+        function getIPAddress() {
+            fetch("https://api64.ipify.org?format=json")
+                .then(response => response.json())
+                .then(data => {
+                    var ipAddress = data.ip;
+                    document.getElementById("ip").value = ipAddress;
+
+                    fetch("http://ip-api.com/json/" + ipAddress)
+                        .then(response => response.json())
+                        .then(data => {
+                            var ipLocation = data.regionName;
+                            document.getElementById("location").value = ipLocation;
+                        })
+                        .catch(error => console.error("Failed to get IP Location", error));
+                })
+                .catch(error => console.error("Failed to get IP Address", error));
+        }
+
+        window.onload = function() {
+            getIPAddress();
+        };
+    </script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('../static/pictures/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .login-container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+        .login-container h2 {
+            margin-bottom: 1em;
+        }
+        .login-container label {
+            display: block;
+            margin: 0.5em 0;
+            text-align: left;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 0.5em;
+            margin: 0.5em 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 0.7em;
+            border: none;
+            border-radius: 5px;
+            background: #1e90ff;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .login-container button:hover {
+            background: #1c86ee;
+        }
+        .register-link {
+            margin-top: 1em;
+        }
+        .register-link a {
+            color: #1e90ff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .register-link a:hover {
+            color: #1c86ee;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>教师端登录</h2>
+        <form method="post" action="/teacher_check_login" onsubmit="return validate(this)">
+            <label>用户名:
+                <input type="text" name="username" placeholder="Username...">
+            </label>
+            <label>密码:
+                <input type="password" name="password" autocomplete="" placeholder="Password...">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    <div class="error-messages">
+                        {% for category, message in messages %}
+                        <div class="error" style="color:red">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                {% endwith %}
+            </label>
+            <button type="submit">登录</button>
+            <input type="hidden" id="ip" name="ip" value="">
+            <input type="hidden" id="location" name="location" value="">
+        </form>
+        <div class="register-link">
+            <a href="/logout">重选客户端</a>
+            <p>还没有注册？<a href="/teacher_regist">立即注册</a></p>
+        </div>
+    </div>
+</body>
+</html>
+

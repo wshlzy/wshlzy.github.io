@@ -1,0 +1,119 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>    
+            function send_AI(event) {
+            event.preventDefault(); // 阻止表单默认提交行为
+
+            var formData = {
+                course: $('#selectBox').val(),
+                type: $('#input1').val(),
+                amount: $('#input2').val()
+            };
+
+            $.ajax({
+                url: '/AIgenerate',
+                type: 'post',
+                data: formData,
+                success: function () {
+                    console.log("success");
+                fetchData()
+                    .then(data => {
+                        var result = document.getElementById("results");
+                        var values1 = String(Object.values(data)); // 提取所有值
+                        var formattedValue = values1.replace(/\n/g, '<br>');
+                        result.innerHTML = formattedValue;
+                    })
+                    .catch(error => console.error('Error fetching the data:', error));
+            },
+                error: function () {
+                    console.log("发送ajax请求失败");
+                }
+            });
+        }
+
+        function fetchData() {
+            return fetch('/static/js/AI_data.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                });
+        }
+
+        $(document).ready(function() {
+            $('#AIcontent').submit(send_AI); // 使用jQuery将事件处理程序绑定到表单提交事件
+        });
+        </script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f8f8f8;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            form {
+                max-width: 600px;
+                width: 90%;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            label {
+                font-weight: bold;
+            }
+
+            select, input[type="text"], input[type="number"] {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 10px;
+                box-sizing: border-box;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            button {
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-top: 10px;
+            }
+
+            button:hover {
+                background-color: #0056b3;
+            }
+        </style>
+    </head>
+    <body>
+    <form method="post" action="/AIgenerate" id="AIcontent">
+        <label for="selectBox">请选择：</label>
+        <select id="selectBox" name="course">
+            <option value="Java">Java programming</option>
+            <option value="python">Python</option>
+            <option value="html">Web</option>
+        </select><br><br>
+
+        <label for="input1">知识点：</label>
+        <input type="text" id="input1" name="select_Type" placeholder="知识点"><br><br>
+
+        <label for="input2">题目数量（只能输入数字2到10）：</label>
+        <input type="number" id="input2" name="question_Amount" min="2" max="10" placeholder="题目数量"><br><br>
+
+        <button type="submit">提交</button>
+        <div id="results"></div>
+    </form>
+    
+    </body>
+    </html>
+</html>

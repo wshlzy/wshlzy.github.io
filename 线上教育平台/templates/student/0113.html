@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .quiz-container {
+            max-width: 600px;
+            width: 90%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            margin-top: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical; /* 允许垂直调整文本框大小 */
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script src="../../static/js/Cookie.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function fetchData() {
+            return fetch('/static/js/stu_HW.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                });
+        }
+        function showQues(){
+            checkCookie('username');
+            fetchData()
+                .then(data => {
+                    var result = document.getElementById("quiz_pos");
+                    var values1 = Object.values(data); // 提取所有值
+                    var formattedValue = String(values1).replace(/\n/g, '<br>');
+                    result.innerHTML = formattedValue;
+                })
+                .catch(error => console.error('Error fetching the data:', error));
+        }
+
+        function send_AIC() { // 阻止表单默认提交行为
+            var formData = {
+                course: $('#course').val(),
+                type: $('#type').val(),
+                answer: $('#answer').val(),
+                username: $('#cookie').val(),
+                question: $('#').val()
+            };
+
+            $.ajax({
+                url: '/hw_confirm',
+                type: 'post',
+                data: formData,
+                success: function () {
+                    console.log("success");
+                fetchData()
+                    .then(data => {
+                        var result = document.getElementById("results");
+                        var values1 = String(Object.values(data)); // 提取所有值
+                        var formattedValue = values1.replace(/\n/g, '<br>');
+                        result.innerHTML = formattedValue;
+                    })
+                    .catch(error => console.error('Error fetching the data:', error));
+            },
+                error: function () {
+                    console.log("发送ajax请求失败");
+                }
+            });
+        }
+    </script>
+</head>
+
+<body onload="showQues()">
+    <div class="quiz-container">
+        <form>
+            <input type="hidden" value="Java" name="course">
+            <input type="hidden" value="i++" name="type">
+            <p id="quiz_pos"></p>
+            <button type="button" style="display:none;" onclick="send_AIC()">解析</button>
+        </form>
+        {% if result %}
+        <form method="post" action="/stud_homepage">
+            <a type="hidden" name="course" id="course" value="{{ result.course }}">
+            <a type="hidden" name="knowledge" id="knowledge" value="{{ result.knowledge }}"></a>
+            <a type="hidden" name="content" id="content" value="{{ result.content }}"></a>
+            <textarea name="quiz_position" placeholder="Enter your answer here" id="answer"></textarea>
+            <input type="hidden" id="cookie">
+            <button type="submit">提交答案</button>
+        </form>
+        {% endif %}
+    </div>
+</body>
+</html>

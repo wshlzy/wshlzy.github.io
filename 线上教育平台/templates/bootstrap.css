@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff; /* Alice Blue */
+    color: #333;
+}
+
+.login-panel {
+    margin-top: 150px;
+}
+
+.table-scrol {
+    margin-top: 50px;
+}
+
+h1 {
+    color: #1e90ff; /* Dodger Blue */
+    margin-top: 50px;
+}
+
+.table-responsive {
+    margin-top: 20px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+}
+
+.table thead tr {
+    background-color: #1e90ff; /* Dodger Blue */
+    color: white;
+}
+
+.table th, .table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: rgb(14, 0, 0);
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f0f8ff; /* Alice Blue */
+}
+
+.table tr:hover {
+    background-color: #ddd; /* Darker Gray */
+}
+
+.table th {
+    background-color: #1e90ff; /* Dodger Blue */
+    color: white;
+}
+
+.table td {
+    background-color: rgb(253, 253, 253);
+    color: rgb(10, 0, 0);
+}
+
+.btn-danger {
+    background-color: #ff4c4c; /* Red */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn-danger:hover {
+    background-color: #ff1c1c; /* Darker Red */
+}

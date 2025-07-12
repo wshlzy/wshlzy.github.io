@@ -1,0 +1,20 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#mainB{
+    position:relative;
+    left: 700px;
+    bottom:400px;
+}
+
+#type{
+    font-family: 'Times New Roman';
+    font-size: large;
+    background-color: rgb(213, 248, 236);
+    border-radius: 2px;
+}
+
+#type[type="button"]:hover{
+    background-color: rgb(159, 188, 178);
+}

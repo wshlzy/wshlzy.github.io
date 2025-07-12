@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>返回按钮示例</title>
+<!-- 添加 Font Awesome 字体图标库 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+    .returnButton {
+        border-radius: 10px;
+        background-color: #6ebad3;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+        margin-top: 1em;
+        font-size: 1em;
+    }
+
+    .returnButton:hover {
+        background-color: #5a9bf6;
+    }
+</style>
+</head>
+<body>
+    <div class="content">
+        <!-- 内容部分 -->
+        <h1>课程目录</h1>
+        <div id="programmingFrame" style="display: block;">
+            <ul class="directory">
+                <li>Lecture 1</li>
+                <li>Lecture 2</li>
+                <li>Lecture 3</li>
+                <li>Lecture 4</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 返回按钮 -->
+    <button class="returnButton" onclick="goBack()">
+        <i class="fas fa-arrow-left"></i> 返回
+    </button>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
