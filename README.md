@@ -1,3 +1,5 @@
-# wshlzy.github.io
-个人网站
-AI教育网站：包括学生端和教师端 学生端提供课件查阅和课后题服务，课后题做完后可以根据错题继续做相似题目 教师端能够发布作业，收取作业和查看学生课后题的完成情况及相应统计图
+## 在线教育网站 (Flask + HTML) 
+**GitHub**: github.com/wshlzy/wshlzy.github.io 
+**技术栈**：
+- 后端：Flask框架 + Flask-Login(Session) + MySQL数据库 + Echarts库展示
+- 前端：HTML5 / CSS3 / JavaScript (ES6+)
