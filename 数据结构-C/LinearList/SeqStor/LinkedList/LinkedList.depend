@@ -1,0 +1,33 @@
+# depslib dependency file v1.0
+1729610262 source:d:\program files\codeblocks\ky\linear list\sequential storage\linked list\main.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+
+1729610267 d:\program files\codeblocks\ky\linear list\sequential storage\linked list\linkedlist.h
+
+1729610262 source:d:\program files\codeblocks\ky\linearlist\seqstor\linklist\main.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+
+1729610267 d:\program files\codeblocks\ky\linearlist\seqstor\linklist\linkedlist.h
+
+1729783834 source:d:\program files\codeblocks\ky\linearlist\seqstor\linkedlist\main.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+
+1729783823 d:\program files\codeblocks\ky\linearlist\seqstor\linkedlist\linkedlist.h
+
+1731639862 source:d:\program files\codeblocks\ky\linearlist\seqstor\linkedlist\tortoise.c
+	<stdio.h>
+	<stdlib.h>
+	"tortoise.h"
+	"LinkedList.h"
+
+1730432719 d:\program files\codeblocks\ky\linearlist\seqstor\linkedlist\tortoise.h
+
+1731641009 source:d:\program files\codeblocks\ky\linearlist\seqstor\linkedlist\lrucache.c
+	<stdio.h>
+

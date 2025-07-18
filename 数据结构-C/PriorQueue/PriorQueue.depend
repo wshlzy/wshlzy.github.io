@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1718298227 source:d:\program files\codeblocks\priorqueue\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
+1714840960 source:e:\data structure\class\priorqueue\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+

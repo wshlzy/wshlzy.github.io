@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1718513414 source:d:\program files\codeblocks\forrecite\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
