@@ -1,11 +1,4 @@
-# 个人项目 Sancho's Personal Program
-
-## 在线教育网站 (Flask + HTML) 
-**技术栈**：
-- 后端：Flask框架 + Flask-Login(Session) + MySQL数据库 + Echarts库展示
-- 前端：HTML5 / CSS3 / JavaScript (ES6+)
-
-## 音乐排行榜爬虫 (Selenium + HTML)
+# 个人项目
 
 ## 数据结构 
 使用纯C语言从零实现的全套基础数据结构库，包含链表、树、堆和索引结构的完整实现。
